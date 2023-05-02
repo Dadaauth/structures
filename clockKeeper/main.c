@@ -16,7 +16,7 @@ struct dateAndTime clockKeeper(struct dateAndTime day, int secs)
 	struct dateAndTime now;
 
 	now.eTime = timeUpdate(day.eTime, secs);
-	if (now.eTime.hour == 0)
+	if (now.eTime.hour == 0 || now.eTime.hour < day.eTime.hour)
 		now.eDate = dateUpdate(day.eDate);
 	else
 		now.eDate = day.eDate;
@@ -36,7 +36,7 @@ int main(void)
 		{ 23, 59, 59 },
 	};
 	
-	now = clockKeeper(day, 99009);
+	now = clockKeeper(day, 12000);
 	printf("Updated Time: %i:%i:%i\n", now.eTime.hour, now.eTime.minutes, now.eTime.seconds);
 	printf("Updated Date: %i/%i/%i\n", now.eDate.day, now.eDate.month, now.eDate.year);
 	return (0);
